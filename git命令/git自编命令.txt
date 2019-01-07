@@ -79,7 +79,8 @@ $ git cherry-pick [commit]
  $ git remote add origin <url>
 #将内容推送到远程库origin的master分支,第一次需要-u
  $ git push -u origin master
-
+# 取回远程仓库的变化，并与本地分支合并
+$ git pull [remote] [branch]
 
 #删除仓库，直接删除.git文件夹
  $ rm -rf .git
