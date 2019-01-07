@@ -1,0 +1,100 @@
+
+ $ git config --global user.name"名字"
+ $ git config --global user.email"邮箱"
+　一：忽略文件
+#忽略文件,创建.gitignore文件，里面输入__pycache__/
+#忽略已纳入版本管理中的文件
+ $ git update-index --assume-unchanged 文件名
+#取消忽略的文件
+ $ git update-index --no-assume-unchanged 文件名
+
+　二：提交到暂存区
+#初始化仓库，在需要创建仓库的文件夹中
+ $ git init 
+#查看项目状态
+ $ git status
+#将所有文件提交到暂存区
+ $ git add .
+#将文件提交到暂存区
+ $ git add 文件名
+
+　三：提交到仓库
+#将暂存区的文件提交到仓库
+ $ git commit -m "提示信息"
+#将修改的文件直接提交到仓库
+ $ git commit -am "提示信息"
+
+　四：查看记录
+#查看每次命令的记录
+ $ git reflog
+#查看提交的历史记录，按q退出
+ $ git log
+#显示提交历史记录的简单版本
+ $ git log --pretty=oneline
+#显示最近5次的提交记录
+ $ git log -5 --pretty --oneline
+
+　五：放弃提交
+#取消添加到暂存区的文件
+　$ git reste HEAD 文件名
+#放弃工作区的改动
+　$ git checkout --文件名
+#放弃最近一次提交
+ $ git checkout .
+#放弃某个文件的修改
+ $ git checkout 文件名
+#放弃所有文件的修改
+ $ git checkout //
+#捡出以前的提交,id前6个字符(id:be017b),进入分离头指针，最好不要修改改文件
+ $ git checkout be017b
+#回到master分支
+ $ git checkout master
+#分离针头修改文件后保存到新建的分支
+ $ git branch <新分支名> <保存文件的id>
+
+　六：返回以前版本
+#回复到id前6位为be017b的状态
+ $ git reset --hard be017b
+
+  七：分支
+#列出本地分支并查询在那个分支
+ $ git branch
+#创建分支,但依然留在当前分支
+ $ git branch <nema>
+#创建分支,并转到该分支
+ $ git checkout -b <name>
+#转到master分支
+ $ git checkout master
+#合并某分支到当前分支
+ $ git merge <name>
+#合并某分支到当前分支，并创建commit
+ $ git merge --no-ff -m "描述" <name>
+#选择一个commit,合并进当前分支
+$ git cherry-pick [commit]
+#删除分支
+ $ git branch -d <name>
+
+ 八:github
+#添加远程库名字<origin>
+ $ git remote add origin <url>
+#将内容推送到远程库origin的master分支,第一次需要-u
+ $ git push -u origin master
+# 取回远程仓库的变化，并与本地分支合并
+$ git pull [remote] [branch]
+
+#删除仓库，直接删除.git文件夹
+ $ rm -rf .git
+
+
+
+
+
+
+
+
+
+
+
+
+
+
