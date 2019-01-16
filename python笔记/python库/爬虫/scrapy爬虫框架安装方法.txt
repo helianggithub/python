@@ -1,0 +1,95 @@
+Windows
+
+安装lxml
+最好的安装方式是通过wheel文件来安装，http://www.lfd.uci.edu/~gohlke/pythonlibs/，从该网站找到lxml的相关文件。假如是Python3.5版本，WIndows 64位系统，那就找到lxml?3.7.2?cp35?cp35m?win_amd64.whl 这个文件并下载，然后通过pip安装。
+
+下载之后，运行如下命令安装：
+pip3 install wheel
+pip3 install lxml?3.7.2?cp35?cp35m?win_amd64.whl
+即可完成lxml的安装，其他文件替换文件名即可。
+
+安装zope.interface
+到官方网站https://pypi.python.org/pypi/zope.interface#downloads下载对应版本的wheel文件，然后pip安装。比如Python 3.5版本，Windows 64位系统，就下载zope.interface-4.3.3-cp35-cp35m-win_amd64.whl。
+
+然后安装wheel文件即可，命令如下：
+
+pip3 install zope.interface-4.3.3-cp35-cp35m-win_amd64.whl
+其他版本替换文件名即可。
+
+安装pyOpenSSL
+官方网站下载wheel文件，https://pypi.python.org/pypi/pyOpenSSL#downloads，如当前最新版本名称是pyOpenSSL-16.2.0-py2.py3-none-any.whl，下载后安装即可。
+
+pip3 install pyOpenSSL-16.2.0-py2.py3-none-any.whl
+安装Twisted
+同理，http://www.lfd.uci.edu/~gohlke/pythonlibs/#twisted下载wheel文件，利用pip安装即可。
+如Python 3.5版本，Windows 64位系统，下载
+Twisted?17.1.0?cp35?cp35m?win_amd64.whl，然后pip安装。
+
+pip3 install Twisted?17.1.0?cp35?cp35m?win_amd64.whl
+安装pywin32
+从官方网站 https://sourceforge.net/projects/pywin32/files/pywin32/Build%20220/ 下载对应版本的安装包安装即可。
+
+安装Scrapy
+最后安装Scrapy即可，依然使用pip，命令如下：
+
+pip3 install Scrapy
+CentOS、RedHat、Fedora
+
+依赖库安装
+确保一些必须的类库已经安装，运行如下命令：
+
+sudo yum groupinstall development tools
+sudo yum install python34-devel epel-release libxslt-devel libxml2-devel openssl-devel
+安装Scrapy
+利用pip安装Scrapy即可，运行如下命令：
+
+pip3 install Scrapy
+Ubuntu、Debian、Deepin
+
+依赖库安装
+首先确保一些必须的类库已经安装，运行如下命令：
+
+sudo apt-get install build-essential python3-dev libssl-dev libffi-dev libxml2 libxml2-dev libxslt1-dev zlib1g-dev
+安装Scrapy
+利用pip安装Scrapy即可，运行如下命令：
+
+pip3 install Scrapy
+虽然腾讯云没有Mac系统，不过在这里还是加上MacOS的安装。
+
+Mac OS
+
+依赖库安装
+在Mac上构建Scrapy的依赖库需要C编译器以及开发头文件，它一般由Xcode提供，运行如下命令安装即可：
+
+xcode-select --install
+安装Scrapy
+利用pip安装Scrapy即可，运行如下命令：
+
+pip3 install Scrapy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

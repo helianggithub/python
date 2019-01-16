@@ -1,0 +1,98 @@
+
+
+
+
+ 导入模块--import 模块
+
+ 导入模块的类--from 模块 import 类
+
+ 导入模块的函数--from 模块 import 函数
+
+ 导入模块的所有内容--form 模块 import *
+
+ 重新导入模块--reload(模块)
+
+ 查看模块特性--dir()
+
+ 查找模块源代码位置--.__file__
+
+ 打印模块自述信息--.__doc__
+
+
+
+
+ 获取用户敏感信息包--getpass
+
+
+
+ 易于阅读的格式打印数据包--pprint
+
+
+
+ 模块--webbrowser
+     打开网页--webbrowser.open('http://www.地址')
+
+
+
+ 系统模块--sys
+     告诉解释器在哪里找模块--sys.path.append('路径'）
+ 
+
+
+ 堆模块--heapq
+     将x入堆--heappush(x)
+     将堆中最小元素弹出--heappop(heap)
+     将heap属性强制应用到任意一个列表--heapify(heap)
+     将堆中最小的元素弹出，同时将x入堆--heapreplace(heap,x)
+     返回iter中第n大的元素--nlargest(n,iter)
+     返回iter中第n小的元素--nsmallest(n,iter)
+
+
+ 双端队列模块--collections
+     生成双端队列a--a=deque(列表）
+     添加--a.append()
+     左添加--a.appendleft()
+     删除--a.pop()
+     左删除--a.popleft()
+     把左边x位数移到最后--a.rotate(x)
+
+
+ 文档操作模块--shelve
+     文件以字典形式储存信息提供文件名a--open(a)
+
+
+ 文档操作模块--json
+     加载文件--load()
+     保存文件(x格式)--dump(字典,文件,indent=x )
+     打印文件(x格式)__dumps(字典，indent=x)
+      
+
+ 
+ 返回文件的可迭代对象--fileinput
+     用for循环来调用文件a的内容--fileinput.input(a)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

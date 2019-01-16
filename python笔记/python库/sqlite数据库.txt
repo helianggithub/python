@@ -1,0 +1,45 @@
+
+ 数据库--sqlite3
+     null--空值，integer--整数，real--浮点数，text--字符串，blob--数据(二进制文件(图片，压缩文件等))
+
+     打开创建数据库文件-- f=sqlite3.connect('文件名.db')
+     创建游标          --cursor=f.cursor()
+
+     创建名为name的表，
+     它的列有a,b,c三项,
+     为文本，文本，整数--sql='''create table name(a text,b text,c int)
+
+     用游标把列写入    --cursor.execute(sql)
+     关闭游标与数据库连接--cursor.close()
+
+     把数据插入到表name中，
+     其中包含a,b,c三列，
+     数据保存在a_1,b_1,c_1中--sql='''insert into name(a,b,c) values(:a_1,:b_1,:c_1)
+
+     用游标把列写入,
+     指明要插入的数据d,e,f --cursor.execute(sql,{'a_1':d,'b_1':e,'c_1':f)
+     提交文件让数据库保存  --f.commit()
+     查询表name中的所有内容--sql="select * from name"
+     查询表name中a的内容   --sql="select a from name"
+     把查询的内容保存在r中 --r=cursor.execute(sql)
+     返回要查询内容的元组  --r.fetchall()
+     查询name表中,
+     a列等于b的内容        --sql="select * from name where a='b'"
+     查询name表中,
+     a列不等于b的内容      --sql="select * from name where a!='b'"
+     查询name表中,a列
+     以b开始或结束的内容   --sql="select * from name where a like '% b %'"
+     查询name表中,a列不以
+     'b'开始或结束的内容   --sql="select * from name where a not like '% b %'"
+     查询name表中,
+     a列大于或小于'b'的内容--sql="select * from name where a < b "
+     返回name表中以a列
+     为顺序的列表          --sql="select * from name order by a"
+     返回name表中以a列
+     为相反顺序的列表      --sql="select * from name order by a desc"
+     返回name表a列中唯一项 --sql="select distinct a form name"
+     把name表a列中的
+     'b'修改为'c'          --sql="update name set a='c' where a='b' "
+     删除name表a列中
+     所有和'b'一样的项     --sql="delete from name where a='b'" 
+

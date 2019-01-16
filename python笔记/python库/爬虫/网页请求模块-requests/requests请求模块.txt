@@ -1,0 +1,91 @@
+安装模块：# python 2+
+            pip install requests
+          # python 3+
+            pip3 install requests
+
+import requests
+import webbrowser
+
+
+#百度get网址           
+>>> requests.get('网址',params='关键字参数') 　　　　　　　　　　　　　　　#param = {"wd": "莫烦Python"}  # 搜索的信息
+>>> param = {"wd": "莫烦Python"}                                         # 搜索的信息
+>>> r = requests.get('http://www.baidu.com/s', params=param)             #得到url
+>>> print(r.url)    #https://www.baidu.com/s?wd=莫烦python
+>>> webbrowser.open(r.url)  　　　　　　　　　　　　　　　　　　　　       #在你的默认浏览器中打开url
+>>> requests.get('url').text　　　　　　　　　　　　　　　　　　　　　　   #得到网站的html
+
+
+>>> data = {'firstname': '莫烦', 'lastname': '周'}                       #post用户名和密码
+>>> r = requests.post('http://pythonscraping.com/files/processing.php', data=data)
+>>> r.text                                                               #可以得到登录后的html
+
+
+                      Request URL (post 要用的 URL)
+                      Request Method (post)                              #保存的post图片有获得信息的方法
+                      Form Data (post 去的信息)
+                             #调出浏览器的 inspect (右键点击 inspect, 中文是检查),里面的值 name="firstname" 和  name="lastname",
+                            这两个就是我们要 post 提交上去的关键信息(不同的网站值不一样，自己找)
+                            有了这些记录, 我们就能开始写 Python 来模拟这一次提交 post 了. 根据 'firstname' 和 'lastname', 
+                            也就是上图里面的 Form data, 组织成一个python 字典. 让后把这个字典传入 requests.post(), 
+                            注意, 这里的 post 里面的 url, 不是我们填表时的 url,而是要把 Form 信息提交去的那个网页, 
+                            也就是上图中查看到的 Request URL
+
+#上传数据
+>>> data = {'firstname': '莫烦', 'lastname': '周'}                       #post去的数据,参数data
+>>> r = requests.post('http://pythonscraping.com/files/processing.php', data=data)
+>>> print(r.text)　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 #返回的html
+
+
+                              #用网页检查找到关键字uploadFile， 我们将这个名字记下, 放入 python 的字典当一个 “key”.接着在字典中, 
+                            使用 open 打开一个图片文件, 当做要上传的文件. 把这个字典放入你的post里面的files 参数.就能上传你的图片了
+
+
+#上传图片
+>>> file = {'uploadFile': open('./image.png', 'rb')}                    #打开要上传的图片,参数files
+>>> requests.post('http://pythonscraping.com/files/processing2.php', files=file)
+>>> print(r.text)             　　　　　　　　　　　　　　　　　　　　　　　
+           
+
+#登录
+>>> payload = {'username': 'Morvan', 'password': 'password'}           #将用户名和密码post给网站
+>>> r = requests.post('http://pythonscraping.com/pages/cookies/welcome.php', data=payload)
+>>> print(r.cookies.get_dict())                                        #得到cokies的信息
+>>> r = requests.get('http://pythonscraping.com/pages/cookies/profile.php', cookies=r.cookies)
+>>> print(r.text)                                                      #得到通过传入cokkies登录后的网站的html
+
+   
+#使用Session登录,不用每次都传递cookies，session内部有post后的cookies
+>>> session = requests.Session()                                       #调用Session()
+>>> payload = {'username': 'Morvan', 'password': 'password'}           #post入用户名和密码
+>>> r = session.post('http://pythonscraping.com/pages/cookies/welcome.php', data=payload)
+>>> print(r.cookies.get_dict())
+>>> r = session.get("http://pythonscraping.com/pages/cookies/profile.php")   #不用传入cookies
+>>> print(r.text)　　　　　　　　　　　　　　　　　　　　　　　　　　　　　#得到html
+
+
+
+#下载文件
+>>> r = requests.get(文件的url)                                       #打开网址
+>>> with open('D:/123/image2.jpg', 'wb') as f:                        #以二进制写入的形式打开文件,保存的文件名为image2,格式jpg
+>>> f.write(r.content)                                                #把下载的文件写入
+
+#下载大文件,chunk_size参数
+>>> r = requests.get(文件的url, stream=True)                          #stream=True 持续写入
+>>> with open('D:/123/image2.jpg', 'wb') as f:
+>>> for chunk in r.iter_content(chunk_size=32):                       #chunk_size=32,每次写入32字节
+        f.write(chunk)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

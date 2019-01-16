@@ -1,0 +1,12 @@
+from random import *
+
+ 生成随机数模块--random   
+     获取a-b之间的随机整数--randint(a,b) 
+     获取a-b之间的随机浮点数--uniform(a,b)  
+     获取0-1之间的浮点数--random()  
+     获取列表n内的随机项--choice(n)
+     获取n(二进制)位内的长整型数--getrandbits(n)
+     获取指定的随机数--randrange(开始，结束，步长)
+     给列表a内的项随机移位--shuffle(a)
+     从列表a中选取n个随机项--sample(a,n)
+ 

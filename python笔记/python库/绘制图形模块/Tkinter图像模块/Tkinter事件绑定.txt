@@ -1,0 +1,149 @@
+一个Tkinter主要跑在mainloop进程里。Events可能来自多个地方，比如按键，鼠标，或是系统事件。 
+Tkinter提供了丰富的方法来处理这些事件。对于每一个控件Widget，你都可以为其绑定方法function。
+
+widget.bind(event,handler)
+1
+如果相应的event发生了，就会调用handler处理事件。举个例子： 
+捕获鼠标点击事件：
+
+from Tkinter import *  #python 2
+from tkinter import *  #python 3
+
+root = Tk()
+def callback(event):
+    print "clicked at", event.x, event.y
+frame = Frame(root, width=100, height=100)
+frame.bind("<Button-1>", callback)
+frame.pack()
+
+root.mainloop()
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+在这里，我们使用frame的bind方法将一个callback方法绑定到一个事件，也就是点击鼠标左键，每点击一次，控制台打印出当前点击的坐标x，y。 
+键盘事件被发送到当前拥有焦点的widget，你可以用focus_set方法来设置widget们的焦点： 
+捕获键盘事件：
+
+from Tkinter import *
+
+root = Tk()
+
+def key(event):
+    print "pressed", repr(event.char)
+
+def callback(event):
+    print "clicked at", event.x, event.y
+
+frame = Frame(root, width=100, height=100)
+frame.bind("<Key>", key)
+frame.bind("<Button-1>", callback)
+frame.pack()
+
+root.mainloop()
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+运行这个程序，你会发现，只有在当前窗口获取焦点的情况下，你按键盘键它才会捕获到并打印。
+
+事件
+
+事件用字符串定义，有一个特殊的语法规则：
+
+<modifier-type-detail>
+1
+type字段是最重要的，它指出了事件的种类，可以指定为Button，Key或者Enter，Configure等等。modifier和detail字段可以提供一些附加信息，在大多数情况下可以不指定。还有很多方法可以简化事件字符串，比如：为了匹配一个键盘键，你可以省略尖角括号，直接用 键 即可。除非它是空格 ， 或本身就是尖括号。 
+让我们来看看最常用的事件格式： 
+事件格式：
+
+<Button-1>
+1
+一个鼠标点击事件。1代表左键，2代表中键，3代表右键。当你在一个widget上点击鼠标按键，tkinter会自动捕获并触发event，注意，当按键被抬起时才会执行handler。鼠标的位置（相对于widge）x，y会被发往event对象传入handler。你也可以这样:，<1>，它们是等价的。我比较喜欢这种方式。
+
+<B1-Motion>
+1
+鼠标拖动事件。1代表按下左键拖动，2代表中键，3代表右键。同样的，鼠标的x，y会以event对象方式被送往handler。
+
+<ButtonRelease-1>
+1
+鼠标按下之后释放
+
+<Double-Button-1>
+1
+双击鼠标
+
+<Enter>
+1
+注意，这里是鼠标指针进入到widget里，并不是代表按下键盘上的Enter键。
+
+<Leave>
+1
+和上面的进入对应，鼠标离开widget。
+
+<FocusIn> <FocusOut>
+1
+<Return> <Cancel> <BackSpace> <Tab> <Shift_L> <Control_L>
+<Alt_L> <Home> <Left> <Up> <Right> <Down> <Delete> <F1> <F2>
+1
+2
+这些按键都和键盘上的一一对应。
+
+<Key>
+1
+随便一个按键，键值会以char的格式放入event对象。
+
+a b c ... 1 2 ... 
+1
+对应键盘上的按键
+
+<Configure>
+1
+这个关键了，如果widget的大小改变了，或者是位置，新的大小（width和height）会打包到event发往handler。
+
+事件对象
+
+事件对象是独立的python实例，有很多属性。 
+对象属性：
+
+widget  产生event的实例，不是名字，所有对象拥有
+x，y     鼠标位置，单位：像素
+x_root，y_root       鼠标相对于屏幕左上角的位置，像素
+char        仅键盘事件，string
+num     按钮num，仅鼠标事件
+width，height        widget新大小
+type        事件类型
+1
+2
+3
+4
+5
+6
+7
+实例绑定和类绑定
+
+上面我们用的绑定方法是绑定到一个实例对象上，这就意味着，如果新建一个实例，它是没有绑定事件的。 
+实际上，tkinter允许你将事件绑定到类上，甚至是绑定到程序本身。你可以创建四个层面的绑定：
+
+绑定到widget instance 使用bind方法
+绑定到widget的toplevel windows，顶层窗口，也是用bind
+绑定到widget class，使用bind_class
+比如，你可以使用bind_all来创建一个F1键的绑定，这样你可以在任何地方打开帮助

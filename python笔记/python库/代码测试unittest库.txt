@@ -1,0 +1,112 @@
+
+import unittest               #导入测试模块，unittest.TestCase
+
+import get_formatted_name     #导入需要测试的函数
+
+class NamesTestCase(unittest.TestCase):    #继承测试类
+
+    def test_first_last_name(self):        #测试函数开头必需是test，Python会自动运行test开头的函数
+        formatted_name = get_formatted_name('janis','joplin') #函数是否能处理janis,joplin这两个值
+        self.assertEqual(formatted_name,"Janis Joplin")       #断言，函数得到的结果是不是'Janis Joplin'
+       
+    def test_first_middle_last_name(self):
+        formatted_name = get_formatted_name('wolfgang','mozart','amadeus')
+        self.assertEqual(formatted_name,'Wolfgang Mozart Amadeus')#多重测试
+
+unittest.main()#运行测试程序
+
+
+断言方法：
+ 
+ assertEqual(a,b)       核实 a == b
+ 
+ assertNotEqual(a,b)    核实 a != b
+
+ assertTrue(x)          核实x为True
+
+ assertFalse(x)         核实x为False
+
+ assertIn(item,list)    核实item在list中
+
+ assertNotIn(item,list) 核实item不在list中
+
+
+类测试
+
+# coding:gbk
+import unittest
+from parrot import AnonymousSurvey           #导入需要用到的类，
+
+class TestAnonymousSurvey(unittest.TestCase):
+    '''针对AnonymousSurvey类的测试'''
+    
+    def setUp(self):                                                #初始化需要用到的变量，Python先运行setUp函数，其他地方可以使用setUp中创建的变量
+        '''创建一个调查对象和一组答案，供使用的测试方法是用'''
+        question = 'what language did you first learn to speak?'
+        self.my_survey = AnonymousSurvey(question)
+        self.responses = ['English','Spanish','Mandarin']
+        
+    def test_store_single_response(self):
+        '''测试单个答案会被妥善地存储'''
+        self.my_survey.store_response(self.responses[0])
+        self.assertIn(self.responses[0],self.my_survey.responses)   #responses中的值是否包含在my_survey.respinses中
+        
+    def test_store_three_responses(self):
+        '''测试三个答案会被妥善地存储'''
+        for response in self.responses:
+            self.my_survey.store_response(response)
+        for response in self.responses:
+            self.assertIn(response,self.my_survey.responses)
+unittest.main()
+
+
+上面需要用到的类
+
+class AnonymousSurvey():
+    '''收集匿名调查问卷'''
+    def __init__(self,question):
+        '''存储一个问题，并为存储答案做准备'''
+        self.question = question
+        self.responses = []
+    def show_question(self):
+        '''显示调查问卷'''
+        print (self.question)
+    def store_response(self,new_response):
+        '''存储单份调查答案'''
+        self.responses.append(new_response)      
+    def show_results(self):
+        '''显示收集到的所有答案'''
+        print ('Survey results')
+        for response in self.responses:
+            print ('- ' + response)
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,73 @@
+import pygal
+
+#pygal绘制条形图
+hist = pygal.Bar()                         #创建pygal实例
+hist.title =  'Results'                    #设置实例标题
+hist.x_labels = x轴列表                    #设置x轴标签
+hist.x_title = 'Result'                    #设置x轴标题
+hist.y_title = 'Frequency of Result'       #设置y轴标题
+hist.add('D6',y轴列表)                     #D6是标签，数字列表是显示的值
+hist.render_to_file('文件名.svg')          #渲染为svg文件并保存
+
+
+#pygal绘制折线图
+line_chart = pygal.Line(x_label_rotation=20,show_minor_x_labels=False) #x_label_rotation让x轴上的日期标签顺时针旋转20度
+                                                                        show_minor_x_labels=Fsles告诉图形不显示所有x轴上的标签
+line_chart.title = '收盘价 ($)'                                        #x轴标签
+line_chart.x_labels = x轴列表                                          #x轴列表
+N = 20                                                                 #x轴坐标每隔20天显示一次
+line_chart.x_labels_major = dates[::N]
+line_chart.add('收盘价',y轴列表)                                       #y轴列表
+line_chart.render_to_file('收盘价折线图($).svg')                       #渲染为svg文件并保存
+
+
+#配置样式
+my_style = LS('#333366',base_style=LCS)                                #图表设置为蓝色
+my_config = pygal.Config()                                             #创建配置样式实例
+my_config.x_label_rotation = 45                                        #X标签标题倾斜45度
+my_config.show_legend = False                                          #隐藏图例
+my_config.title_font_size = 24                                         #设置标题字体大小
+my_config.label_font_size = 14                                         #设置Y轴副标题字体大小
+my_config.major_label_font_size = 18                                   #设置y轴主标题字体大小
+my_config.truncate_label = 15                                          #x轴字体长度为15字符,鼠标放上后隐藏字体自动显示
+my_config.show_y_guides = False                                        #隐藏图表水平线
+my_config.width = 1000                                                 #设置自定义宽度
+#配置样式传入实例
+chart = pygal.Bar(my_config,style=my_style)
+chart.title = '标题'
+chart.x_labels = ‘x轴列表标签’
+chart.add('',y轴列表)
+chart.render_to_file('保存的文件名.svg')
+
+#add传入值的字典的列表,鼠标到柱状图上后显示值与说明，点击柱状图打开url。
+y轴列表 = [{'value':y轴值,'label':要显示的说明,'xlink':要打开的url},
+           {'value':y轴值,'label':要显示的说明,'xlink':要打开的url}]   #注意不能有空的说明，否则保存文件会出错
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,89 @@
+需要安装# Python 2+
+        pip install beautifulsoup4
+        # Python 3+
+        pip3 install beautifulsoup4
+
+安装解析器 pip install lxml
+
+
+导入from bs4 import BeautifulSoup
+
+
+
+>> soup = BeautifulSoup(html, features='lxml')                #html=下载的网页源码，lxml解析器
+                                                               读取这个网页信息, 我们将要加载进 BeautifulSoup, 以 lxml 的这种形式加载. 
+                                                               除了 lxml, 其实还有很多形式的解析器, 不过大家都推荐使用 lxml的形式. 
+                                                               然后 soup 里面就有着这个 HTML 的所有信息. 如果你要输出 <h1> 标题, 
+                                                               可以就直接 soup.h1. 
+>> soup = BeautifulSoup(html, features='lxml')
+                print(soup.h1)                                #可以直接打印里面的标签
+
+>> soup.find_all('a',{'class','jan'})                         #找到所有‘a’项里面class为jan的项，可以嵌套soup.find()--找到第一项如果
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　网页中有过个同样的 tag, 比如链接 <a>, 我们可以使用 find_all() 来找到所有的选项.
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　     因为我们真正的 link 不是在 <a> 中间 </a>, 而是在 <a href="link"> 里面,
+                                                              也可以看做是 <a> 的一个属性. 我们能用像 Python 字典的形式, 用 key 来读取l["href"].
+>> all_href = soup.find_all('a')
+>> all_href = [l['href'] for l in all_href]                   #列表推到试，打印出a标签里的href
+                 print(all_href)
+>> ['https://morvanzhou.github.io/', 'https://morvanzhou.github.io/tutorials/scraping']
+>> all_href.get_text()　　　　　　　　　　　　　　　　　　　　　#获取文本信息
+
+
+
+
+>> soup = BeautifulSoup(html, features='lxml')               #Class匹配， 比如我要找所有 class=month 的信息. 并打印出它们的段落内文字.
+>> month = soup.find_all('li', {"class": "month"})
+       for m in month:
+           print(m.get_text())
+                   
+
+               
+>>> jan = soup.find('ul', {"class": 'jan'})                 # （可以嵌套）找到 class=jan 的信息. 然后在 <ul> 下面继续找 <ul> 内部的 <li> 信息.
+    d_jan = jan.find_all('li')                                这样一层层嵌套的信息, 非常容易找到.               
+        for d in d_jan:
+            print(d.get_text())
+                   
+
+                                                     加正则匹配
+                                                             #我们发现, 如果是图片, 它们都藏在这样一个 tag 中:
+                                                             <td>
+>>> s= BeautifulSoup(html, features='lxml')                    <img src="https://morvanzhou.github.io/static/img/course_cover/tf.jpg">
+>>> img_links = s.find_all("img", {"src": re.compile('.*?\.jpg')})    </td>
+>>> for link in img_links:                                  所以, 我们可以用s将这些 <img> tag 全部找出来, 但是每一个 img 的链接(src)都可能
+>>>     print(link['src'])                                  不同.或者每一个图片有的可能是 jpg 有的是 png, 如果我们只想挑选jpg 形式的图片, 
+>>> https://morvanzhou.img/course_cover/tf.jpg              我们就可以用这样一个正则 r'.*?\.jpg' 来选取. 把正则的 compile 
+                                                            形式放到BeautifulSoup 的功能中, 就能选到符合要求的图片链接了.
+
+>>> soup.find_all('a',{'href':re.compile('.*')})     　　　　#匹配a标签里面的网址               
+                
+                
+                      
+                                
+                           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+import threading
+from Queue import Queue  #python2+
+from queue import Queue  #python3
+
+             threading.active_count()--查看有几个线程能工作
+             threading.enumerate()--显示出能工作的线程
+             threading.current_thread()--显示出现在正在工作的线程
+             
+
+             added=threading.Thread(target=job，name='name')--调用一个线程处理job函数,neme--给线程命名
+             added=threading.Thread(target=job,args=(参数))--args传递函数需要调用的参数
+             added.start()--线程开始工作
+             added.join()--线程运行完后，再运行下面的语句
+             
+             q=Queue()--调用
+             q.put(返回值）--函数内返回值使用
+             q.get()--取回返回值
+
+              
+
+
+                      threading.lock()--线程锁，锁住线程等现在的程序运行完，再运行其他程序
+
+             l=threading.Lock()           #调用线程锁
+             def job1():
+                 global A
+                 l.acquire()              #开始锁住线程运行程序
+                 for i in range(10):
+                          A+=1
+                          print 'job1',A
+                 l.release()              #打开线程锁
+            

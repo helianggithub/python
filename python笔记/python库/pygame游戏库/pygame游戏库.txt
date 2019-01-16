@@ -1,0 +1,147 @@
+import pygame, sys
+from pygame.locals import *
+
+RED=(255,0,0)                                       #颜色元组，红，绿，蓝
+BLACK=(0,0,0)
+def main():
+    pygame.init()                                   #初始化
+    screen=pygame.display.set_mode((400,400))       #设置背景窗口，窗口大小400X400像素
+    x=20                                            #设置X坐标，离窗口边距
+    y=20                                            #设置Y坐标，离窗口边距
+    screen.fill(BLACK)                              #设置背景颜色
+    pygame.draw.rect(screen,BLACK,(0,0,400,400))    #刷新背景，前面两个参数设置不刷新区域大小，后面两个是刷新区域
+    pygame.draw.circle(screen,RED,(x,y),10)         #画圆，在坐标X,Y处，画一个半径为10个像素的圆
+    pygame.display.update()                         #显示画面
+    while True:
+        for event in pygame.event.get():            #获得用户输入
+            if event.type==QUIT:                    #点击关闭
+                sys.exit()
+            if event.type==KEYDOWN:                 #获得键盘上下左右输入，移动圆点
+                if event.key==K_LEFT:
+                    x-=5
+                elif event.key==K_RIGHT:
+                    x+=5
+                elif event.key==K_UP:
+                    y-=5
+                elif event.key==K_DOWN:
+                    y+=5
+        pygame.draw.rect(screen,BLACK,(0,0,400,300))#移动后刷新背景
+        pygame.draw.circle(screen,RED,(x,y),10)     #重新获得圆点位置
+        pygame.display.update()                     #显示
+if __name__=='__main__':
+    main()
+
+
+                                                 屏幕上打印字体
+
+import pygame, sys
+from pygame.locals import *
+RED=(255,0,0)
+BLACK=(0,0,0)
+def main():
+    pygame.init()
+    screen=pygame.display.set_mode((400,400))
+    screen.fill((0,0,0))                                       #背景颜色
+    pygame.display.update()
+    fonts=pygame.font.get_fonts()                              #获得本机的字体
+    font=fonts.pop()                                           #弹出字体 
+    while True:
+        try:
+            new_font=pygame.font.SysFont(font,30)              #创建字体，（不是每种字体都支持，避免错误）
+        except:
+            pass
+        text=new_font.render("Hello,world",1,(255,255,255))    #创建字符串，设置颜色
+        screen.fill(BLACK)                                     #刷新背景
+        screen.blit(text,(80,80))                              #显示字符串，位置离边距80X80
+        pygame.display.update()                                #显示      
+        for event in pygame.event.get():                       #获得用户输入
+            if event.type==QUIT:                               #关闭
+                sys.exit()
+            elif event.type==KEYDOWN:                          #用户按下Enter换一种字体
+                font=fonts.pop()
+if __name__=='__main__':
+    main()
+
+
+#屏幕上绘制角色
+    pygame.init()
+    screen = pygame.display.set_mode(1024,768)
+    #加载角色图像并获取其外接矩形
+    image = pygame.image.load('图片位置.bmp')               #加载角色图片，pygame默认支持.bmp格式（图像最好用.bmp格式）
+    rect = image.get_rect()                                 #图片获得矩形属性
+    screen_rect = screen.get_rect()                         #绘制的主屏幕也获得矩形属性，这样能更好的处理角色位置
+    #将角色图片放在屏幕底部中央
+    rect.centerx = self.screen_rect.centerx                 #角色获得在屏幕上的位置，属性有（center,centerx,centery）
+    rect.bottom = self.screen_rect.bottom                   #角色获得在屏幕上的位置，属性有（top,bottom,left,right）
+    #在指定位置绘制图片
+    screen.blit(image,rect)
+
+
+                                   在Python基础编程第12章
+
+#创建需要的形状
+    rect = pygame.Rect(0,0,像素宽,像素高)                   #在屏幕0,0的位置创建一个矩形
+
+#继承Sprite类，让子弹成为精灵，方便编组
+class 类名(Sprite):
+    def __init__(self,other):
+        super().__init__()
+        self.other = other
+#编组
+from pygame.sprite import Group
+变量名 = Group()                                            
+变量名.addd('值')                                           #可以把值添加在"变量名"中,值必需继承Sprite类
+for i in 变量名.sprites():                                  #创建子弹的编组        
+变量名.remove(元素)                                         #历遍编组中的元素
+变量名.empty()                                              #删除编组中余下的所有元素
+
+
+#当编组元素发生碰撞
+pygame.sprite.groupcollide()                                #返回发生碰撞的元素的字典，子弹为键，外星人为值
+pygame.sprite.groupcollide(子弹编组,外星人编组,True,True)   #值为True删除元素，为False保留元素，编组必需继承Sprite类
+
+#检查普通元素发生碰撞
+pygame.sprite.spritecollideany('元素1','元素2')             #有碰撞返回True，没有返回None
+
+#按钮响应
+实例.rect.collidepoint(mouse_x,mouse_y)                     #collidepoint()函数检查坐标mouse_x,mouse_y是否在某个实例的rect范围内
+
+#隐藏光标
+pygame.mouse.set_visible(False)                             #在游戏窗口内隐藏光标，True为显示，隐藏后记得显示
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

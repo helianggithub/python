@@ -1,0 +1,16 @@
+urllib库
+python 2*
+from urllib import urlopen
+from urlparse import urljoin
+
+python 3
+from urllib.request import urlopen
+
+#下载html
+>>> res = urlopen("http://www.baidu.com")                           #打开网址
+>>> res.read().decode('utf-8')                                      #得到网站的html  　　　　　　　　　　　　　　　　　　　　　　
+
+#下载文件
+from urllib.request import urlretrieve                              #导入模块
+>>> url = 'http://n.sinaimg.cn/news/1_img/upload.jpg'　　　         #得到网址
+>>> urlretrieve('url'.'image.jpg')                                  #下载文件，image.jpg保存的文件名与格式

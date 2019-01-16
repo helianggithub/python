@@ -1,0 +1,53 @@
+# python 2+
+pip install selenium
+
+# python 3+
+pip3 install selenium
+
+
+firefox 火狐浏览器下载插件  Katalon Recorder 
+
+安装后需要在官网上下载浏览器的driver 添加的到Windows环境变量里
+
+
+
+
+
+              from selenium import webdriver
+
+              driver = webdriver.Firefox()     # 打开 Firefox 浏览器
+
+              # 将火狐插件内复制的帖在这
+              driver.get("https://morvanzhou.github.io/")                          #打开当前页面
+              driver.find_element_by_xpath(u"//img[@alt='强化学习 (Reinforcement Learning)']").click()
+              driver.find_element_by_link_text("About").click()
+              driver.find_element_by_link_text(u"赞助").click()
+              driver.find_element_by_link_text(u"教程 ?").click()
+              driver.find_element_by_link_text(u"数据处理 ?").click()
+              driver.find_element_by_link_text(u"网页爬虫").click()
+
+              html = driver.page_source       # 得到html，可以爬里面的内容
+              driver.get_screenshot_as_file("./img/sreenshot1.png") #截图，./img/sreenshot1.png-----保存的地址和文件名
+              driver.close()                     #关闭浏览器
+
+
+
+
+                    不显示浏览器
+              from selenium.webdriver.firefox.options import Options   #导入模块
+              from selenium import webdriver
+              f=Options()                                              #初始化
+              f.add_argument("--headless") 
+
+              driver = webdriver.Firefox(firefox_options=f)            # 打开Firefox浏览器,不显示
+              # 将火狐插件内复制的帖在这
+              driver.get("https://start.firefoxchina.cn/")
+              driver.find_element_by_id("search-logo").click()
+              driver.find_element_by_link_text(u"新闻").click()
+              html = driver.page_source                                #得到新闻页面的html
+              driver.get_screenshot_as_file("./1.png")                 #得到新闻页面的截图
+              driver.find_element_by_link_text(u"知道").click()
+              driver.find_element_by_xpath("//div[@id='search-box']/ul/li[4]/strong").click()
+              driver.find_element_by_xpath("//div[@id='search-box']/ul/li[4]/strong").click()
+              driver.find_element_by_link_text(u"网页").click()
+              driver.close()                                           #关闭

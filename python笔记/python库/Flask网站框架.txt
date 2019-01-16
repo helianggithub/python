@@ -1,0 +1,92 @@
+from flask import Flask
+
+
+app=Flask(__name__)   #初始化
+
+@app.route('/')       #@装饰器，/表示要在url根目录下提供
+
+def hello_world():
+    return "Hello world"
+
+if __name__=="__main__":
+    app.run()
+
+
+
+@app.route('/<name>/')
+def name_page(name):
+    return "Hello,{name}".format(name=name)  #添加变量name
+
+
+                       添加模板，要在脚本文件夹下添加一个templates的文件夹
+
+<html>
+     <body>
+          <p>Hello there,new user</p>
+          <p>Here is your lucky number:</p>     #保存为lucky.html文件
+          <p>5</p>
+     </body>
+</html>     
+
+from flask import render_template           #导入模板函数
+@app.route('/')
+def lucky()：
+    return render_template("lucky.html")    #打开模板
+
+
+                       用jinja添加动态内容{{ }}  {% %}
+
+
+<html>
+     <body>
+          <p>Hello there,new user</p>
+          <p>Here is your lucky number:</p>     #保存为lucky.html文件
+          <p>{{ lucky_num }}</p>
+     </body>
+</html>  
+
+@app.route('/')
+def lucky():
+    lucky_num= 7                                #设定需要显示的
+    return render_template('lucky.html',lucky_num=lucky_num)  #传送需要显示的
+
+
+                        为模板添加逻辑
+
+<html>
+     <body>
+          <p>Hello there,new user</p>
+          <p>Here is your lucky number:</p>
+          <p>{{ lucky_num }}</p>
+          {% if lucky_num==99 %}               #当lucky_num==99时显示下面的一段话
+             <p>wow that super lucky </p>
+          {% endif %}                          #结尾
+     </body>
+</html>
+
+from random import randint                     #导入随机函数
+@app.route('/')
+def lucky():
+    lucky_num = randint(1,100)                 #随机显示1到100的数字
+    return render_template('lucky.html',lucky_num=lucky_num)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                               
