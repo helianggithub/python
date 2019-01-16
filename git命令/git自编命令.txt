@@ -38,7 +38,7 @@
 #取消添加到暂存区的文件
 　$ git reste HEAD 文件名
 #放弃工作区的改动
-　$ git checkout --文件名
+　$ git checkout 文件名
 #放弃最近一次提交
  $ git checkout .
 #放弃某个文件的修改
